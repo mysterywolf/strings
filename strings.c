@@ -29,6 +29,13 @@ void* memrchr(const void* ptr, int ch, size_t pos)
     return (*end == ch)?(end):(NULL);
 }
 
+char* strchrnul(const char *s, int c)
+{
+    while (*s != '\0' && *s != c)
+        s++;
+    return (char*)s;
+}
+
 /**
  * @brief erases the data in the n bytes of the memory starting at the
  *        location pointed to by s, by writing zeros (bytes containing '\0') to that area.
