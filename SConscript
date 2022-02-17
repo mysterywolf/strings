@@ -6,7 +6,6 @@ cwd = GetCurrentDir()
 path = [cwd]
 group = []
 
-if rtconfig.PLATFORM != 'gcc':
-    group = DefineGroup('POSIX', src, depend = ['PKG_USING_POSIX_STRINGS'], CPPPATH = path)
+group = DefineGroup('POSIX', src, depend = ['PKG_USING_POSIX_STRINGS'], CPPPATH = path)
 
 Return('group')
