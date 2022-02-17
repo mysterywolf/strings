@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-void* memrchr(const void *s, int c, size_t n);
+void *memrchr(const void* ptr, int ch, size_t pos);
 void bzero(void * s, size_t n);
 
 #endif

@@ -17,23 +17,16 @@
  *
  * @note  This function is GNU extension, available since glibc 2.1.91.
  */
-void* memrchr(const void *s, int c, size_t n)
+void* memrchr(const void* ptr, int ch, size_t pos)
 {
-    register const char* t=s;
-    register const char* last=0;
-    int i;
-
-    t = t + n;
-    for (i=n; i; --i)
+    char *end = (char *)ptr+pos-1;
+    while (end != ptr)
     {
-        if (*t==c)
-        {
-            last=t;
-            break;
-        }
-        t--;
+        if (*end == ch)
+            return end;
+        end--;
     }
-    return (void*)last; /* man, what an utterly b0rken prototype */
+    return (*end == ch)?(end):(NULL);
 }
 
 /**
