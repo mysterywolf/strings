@@ -1,7 +1,7 @@
 from building import *
 Import('rtconfig')
 
-src	= Glob('*.c')
+src = ['strings.c']
 cwd = GetCurrentDir()
 path = [cwd]
 group = []
