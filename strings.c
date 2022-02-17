@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2022, RT-Thread Development Team
+ * Copyright (c) 2006-2022, Meco Jianting Man <jiantingman@foxmail.com>
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -10,6 +10,7 @@
 
 #include <rtthread.h>
 #include <string.h>
+#include <ctype.h>
 #include "strings.h"
 
 /**
@@ -113,4 +114,36 @@ char* strchrnul(const char *s, int c)
     while (*s != '\0' && *s != c)
         s++;
     return (char*)s;
+}
+
+int strcasecmp(const char * s1, const char * s2)
+{
+    const unsigned char * u1 = (const unsigned char*) s1;
+    const unsigned char * u2 = (const unsigned char*) s2;
+    int result;
+
+    while ((result = tolower(*u1) - tolower(*u2)) == 0 && *u1 != 0)
+    {
+        *u1++;
+        *u2++;
+    }
+
+    return result;
+}
+
+int strncasecmp(const char * s1, const char * s2, size_t n)
+{
+    const unsigned char * u1 = (const unsigned char*) s1;
+    const unsigned char * u2 = (const unsigned char*) s2;
+    int result;
+
+    for (; n != 0; n--)
+    {
+        result = tolower(*u1) - tolower(*u2);
+        if (result)
+            return result;
+        if (*u1 == 0)
+            return 0;
+    }
+    return 0;
 }

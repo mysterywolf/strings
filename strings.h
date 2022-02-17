@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2022, RT-Thread Development Team
+ * Copyright (c) 2006-2022, Meco Jianting Man <jiantingman@foxmail.com>
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -24,5 +24,7 @@ int ffsl(long i);
 int ffsll(long long i);
 void *memrchr(const void* ptr, int ch, size_t pos);
 char* strchrnul(const char *s, int c);
+int strcasecmp(const char * s1, const char * s2);
+int strncasecmp(const char * s1, const char * s2, size_t n);
 
 #endif
