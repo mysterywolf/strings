@@ -8,10 +8,10 @@
  * 2022-01-12     Meco Man     The first version.
  */
 
+#include "strings.h"
+#include <ctype.h>
 #include <rtthread.h>
 #include <string.h>
-#include <ctype.h>
-#include "strings.h"
 
 /**
  * @brief erases the data in the n bytes of the memory starting at the
@@ -19,37 +19,36 @@
  *
  * @note  The bzero() function is deprecated (marked as LEGACY in POSIX. 1-2001).
  */
-void bzero(void * s, size_t n)
+void bzero(void* s, size_t n)
 {
     rt_memset(s, 0, n);
 }
 
-void bcopy(const void * src, void * dest, size_t n)
+void bcopy(const void* src, void* dest, size_t n)
 {
     rt_memcpy(dest, src, n);
 }
 
-int bcmp(const void * s1, const void * s2, size_t n)
+int bcmp(const void* s1, const void* s2, size_t n)
 {
     return rt_memcmp(s1, s2, n);
 }
 
-void explicit_bzero(void * s, size_t n)
+void explicit_bzero(void* s, size_t n)
 {
-    volatile char * vs = (volatile char *) s;
-    while (n)
-    {
+    volatile char* vs = (volatile char*)s;
+    while (n) {
         *vs++ = 0;
         n--;
     }
 }
 
-char *index(const char * s, int c)
+char* index(const char* s, int c)
 {
     return strchr(s, c);
 }
 
-char *rindex(const char * s, int c)
+char* rindex(const char* s, int c)
 {
     return strrchr(s, c);
 }
@@ -99,31 +98,29 @@ int ffsll(long long i)
  */
 void* memrchr(const void* ptr, int ch, size_t pos)
 {
-    char *end = (char *)ptr+pos-1;
-    while (end != ptr)
-    {
+    char* end = (char*)ptr + pos - 1;
+    while (end != ptr) {
         if (*end == ch)
             return end;
         end--;
     }
-    return (*end == ch)?(end):(NULL);
+    return (*end == ch) ? (end) : (NULL);
 }
 
-char* strchrnul(const char *s, int c)
+char* strchrnul(const char* s, int c)
 {
     while (*s != '\0' && *s != c)
         s++;
     return (char*)s;
 }
 
-int strcasecmp(const char * s1, const char * s2)
+int strcasecmp(const char* s1, const char* s2)
 {
-    const unsigned char * u1 = (const unsigned char*) s1;
-    const unsigned char * u2 = (const unsigned char*) s2;
+    const unsigned char* u1 = (const unsigned char*)s1;
+    const unsigned char* u2 = (const unsigned char*)s2;
     int result;
 
-    while ((result = tolower(*u1) - tolower(*u2)) == 0 && *u1 != 0)
-    {
+    while ((result = tolower(*u1) - tolower(*u2)) == 0 && *u1 != 0) {
         *u1++;
         *u2++;
     }
@@ -131,15 +128,14 @@ int strcasecmp(const char * s1, const char * s2)
     return result;
 }
 
-int strncasecmp(const char * s1, const char * s2, size_t n)
+int strncasecmp(const char* s1, const char* s2, size_t n)
 {
-    const unsigned char * u1 = (const unsigned char*) s1;
-    const unsigned char * u2 = (const unsigned char*) s2;
+    const unsigned char* u1 = (const unsigned char*)s1;
+    const unsigned char* u2 = (const unsigned char*)s2;
     int result;
 
-    for (; n != 0; n--)
-    {
-        result = tolower(*u1) - tolower(*u2);
+    for (; n != 0; n--) {
+        result = tolower(*u1++) - tolower(*u2++);
         if (result)
             return result;
         if (*u1 == 0)
