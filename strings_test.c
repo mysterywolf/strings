@@ -83,11 +83,14 @@ static void strings_test(void)
     RT_ASSERT(strcasecmp("HELLO", "world") != 0);
     RT_ASSERT(strcasecmp("hello", "hello2") != 0);
     RT_ASSERT(strcasecmp("hello2", "hello") != 0);
+    RT_ASSERT(strcasecmp("hello2", "hello1") != 0);
 
     RT_ASSERT(strncasecmp("hello", "hello", 5) == 0);
     RT_ASSERT(strncasecmp("HELLO", "hello", 5) == 0);
     RT_ASSERT(strncasecmp("HELLO", "world", 5) != 0);
     RT_ASSERT(strncasecmp("hello", "hello2", 5) == 0);
     RT_ASSERT(strncasecmp("hello2", "hello", 5) == 0);
+    RT_ASSERT(strncasecmp("hello2", "hello1", 6) != 0);
+    RT_ASSERT(strncasecmp("hello2", "hello12", 6) != 0);
 }
 MSH_CMD_EXPORT(strings_test, test strings);
