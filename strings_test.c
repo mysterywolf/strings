@@ -92,5 +92,9 @@ static void strings_test(void)
     RT_ASSERT(strncasecmp("hello2", "hello", 5) == 0);
     RT_ASSERT(strncasecmp("hello2", "hello1", 6) != 0);
     RT_ASSERT(strncasecmp("hello2", "hello12", 6) != 0);
+    RT_ASSERT(strncasecmp("hello", "hello2", 7) != 0);
+    RT_ASSERT(strncasecmp("hello1", "hello", 7) != 0);
+    
+    rt_kprintf("All is OK.\n");
 }
 MSH_CMD_EXPORT(strings_test, test strings);

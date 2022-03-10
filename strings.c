@@ -121,8 +121,8 @@ int strcasecmp(const char* s1, const char* s2)
     int result;
 
     while ((result = tolower(*u1) - tolower(*u2)) == 0 && *u1 != 0) {
-        *u1++;
-        *u2++;
+        u1++;
+        u2++;
     }
 
     return result;
@@ -135,11 +135,13 @@ int strncasecmp(const char* s1, const char* s2, size_t n)
     int result;
 
     for (; n != 0; n--) {
-        result = tolower(*u1++) - tolower(*u2++);
+        result = tolower(*u1) - tolower(*u2);
         if (result)
             return result;
         if (*u1 == 0)
             return 0;
+        u1++;
+        u2++;
     }
     return 0;
 }
