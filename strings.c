@@ -107,6 +107,13 @@ void* memrchr(const void* ptr, int ch, size_t pos)
     return (*end == ch) ? (end) : (NULL);
 }
 
+size_t strnlen(const char *s, size_t maxlen)
+{
+    const char *sc;
+    for (sc = s; maxlen != 0 && *sc != '\0'; maxlen--, ++sc);
+    return sc - s;
+}
+
 char* strchrnul(const char* s, int c)
 {
     while (*s != '\0' && *s != c)
