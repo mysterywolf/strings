@@ -27,5 +27,8 @@ size_t strnlen(const char *s, size_t maxlen);
 char* strchrnul(const char *s, int c);
 int strcasecmp(const char * s1, const char * s2);
 int strncasecmp(const char * s1, const char * s2, size_t n);
+char *strdup(const char *s);
+char *strndup(const char *s, size_t size);
+char *strtok_r(char *str, const char *delim, char **saveptr);
 
 #endif

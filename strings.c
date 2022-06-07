@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <rtthread.h>
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * @brief erases the data in the n bytes of the memory starting at the
@@ -151,4 +152,95 @@ int strncasecmp(const char* s1, const char* s2, size_t n)
         u2++;
     }
     return 0;
+}
+
+/* from nuttx */
+char *strdup(const char *s)
+{
+    char *news = (char *)malloc(strlen(s) + 1);
+
+    if (news)
+    {
+        strcpy(news, s);
+    }
+
+    return news;
+}
+
+/* from nuttx */
+char *strndup(const char *s, size_t size)
+{
+    char *news = NULL;
+
+    /* Get the size of the new string (limited to size) */
+    size_t allocsize = strnlen(s, size);
+
+    /* Allocate the new string, adding 1 for the NUL terminator */
+    news = (char *)malloc(allocsize + 1);
+    if (news)
+    {
+        /* Copy the string into the allocated memory and add a NUL
+        * terminator in any case.
+        */
+        rt_memcpy(news, s, allocsize);
+        news[allocsize] = '\0';
+    }
+
+    return news;
+}
+
+/* from nuttx */
+char *strtok_r(char *str, const char *delim, char **saveptr)
+{
+    char *pbegin;
+    char *pend = NULL;
+
+    /* Decide if we are starting a new string or continuing from
+    * the point we left off.
+    */
+    if (str)
+    {
+        pbegin = str;
+    }
+    else if (saveptr && *saveptr)
+    {
+        pbegin = *saveptr;
+    }
+    else
+    {
+        return NULL;
+    }
+
+    /* Find the beginning of the next token */
+    for (;*pbegin && strchr(delim, *pbegin) != NULL; pbegin++);
+
+    /* If we are at the end of the string with nothing
+    * but delimiters found, then return NULL.
+    */
+    if (!*pbegin)
+    {
+        return NULL;
+    }
+
+    /* Find the end of the token */
+    for (pend = pbegin + 1; *pend && strchr(delim, *pend) == NULL; pend++);
+
+    /* pend either points to the end of the string or to
+    * the first delimiter after the string.
+    */
+    if (*pend)
+    {
+        /* Turn the delimiter into a null terminator */
+        *pend++ = '\0';
+    }
+
+    /* Save the pointer where we left off and return the
+    * beginning of the token.
+    */
+    if (saveptr)
+    {
+        *saveptr = pend;
+    }
+
+    return pbegin;
 }
