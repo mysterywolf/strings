@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2022, Meco Jianting Man <jiantingman@foxmail.com>
+ * Copyright (c) 2022, Meco Jianting Man <jiantingman@foxmail.com>
  *
  * SPDX-License-Identifier: Apache-2.0
  *
